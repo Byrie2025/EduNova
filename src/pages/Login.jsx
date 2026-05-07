@@ -5,7 +5,7 @@ import { supabase } from '../supabase'
 export default function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [role, setRole] = useState('eleve')
+  const [role, setRole] = useState('etudiant')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const navigate = useNavigate()
@@ -15,20 +15,27 @@ export default function Login() {
     setLoading(true)
     setError('')
 
-    const { error } = await supabase.auth.signInWithPassword({
+    const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
     })
 
     if (error) {
-      setError('Email ou mot de passe incorrect.')
+      setError('Email ou mot de passe incorrect. Vérifiez vos identifiants.')
       setLoading(false)
       return
     }
 
-    if (role === 'eleve') navigate('/student')
-    if (role === 'professeur') navigate('/teacher')
-    if (role === 'admin') navigate('/admin')
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('role')
+      .eq('id', data.user.id)
+      .single()
+
+    if (profile?.role === 'etudiant') navigate('/student')
+    else if (profile?.role === 'professeur') navigate('/teacher')
+    else if (profile?.role === 'admin') navigate('/admin')
+    else navigate('/student')
 
     setLoading(false)
   }
@@ -70,7 +77,7 @@ export default function Login() {
               Vous êtes
             </label>
             <div className="grid grid-cols-3 gap-2">
-              {['eleve', 'professeur', 'admin'].map((r) => (
+              {['etudiant', 'professeur', 'admin'].map((r) => (
                 <button
                   key={r}
                   type="button"
@@ -81,7 +88,7 @@ export default function Login() {
                       : 'bg-white text-gray-600 border-gray-200 hover:border-[#1A3C8F]'
                   }`}
                 >
-                  {r === 'eleve' ? 'Élève' : r === 'professeur' ? 'Professeur' : 'Admin'}
+                  {r === 'etudiant' ? 'Étudiant' : r === 'professeur' ? 'Professeur' : 'Admin'}
                 </button>
               ))}
             </div>
@@ -130,12 +137,20 @@ export default function Login() {
             disabled={loading}
             className="w-full bg-[#1A3C8F] hover:bg-[#0f2460] text-white font-semibold py-3 rounded-lg transition-all shadow-md disabled:opacity-50"
           >
-            {loading ? 'Connexion...' : 'Se connecter'}
+            {loading ? 'Connexion en cours...' : 'Se connecter'}
           </button>
         </form>
 
+        {/* Register link */}
+        <p className="text-center text-sm text-gray-400 mt-6">
+          Pas encore de compte ?{' '}
+          <a href="#" className="text-[#1A3C8F] font-medium hover:underline">
+            Contactez votre administration
+          </a>
+        </p>
+
         {/* Footer */}
-        <p className="text-center text-xs text-gray-400 mt-6">
+        <p className="text-center text-xs text-gray-300 mt-4">
           EduNova © 2025 · Plateforme éducative ivoirienne
         </p>
       </div>
