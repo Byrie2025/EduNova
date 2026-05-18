@@ -41,20 +41,20 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#1A3C8F] to-[#0f2460] flex items-center justify-center px-4">
+    <div className="min-h-screen bg-gradient-to-br from-[#0F172A] to-[#1e293b] flex items-center justify-center px-4">
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md p-8">
 
         {/* Logo */}
         <div className="flex justify-center mb-6">
-          <div className="w-16 h-16 bg-[#1A3C8F] rounded-2xl flex items-center justify-center shadow-lg">
+          <div className="w-16 h-16 bg-[#0F172A] rounded-2xl flex items-center justify-center shadow-lg">
             <span className="text-2xl font-black text-white tracking-tight">
-              E<span className="text-[#22C55E]">N</span>
+              E<span className="text-[#F43F5E]">N</span>
             </span>
           </div>
         </div>
 
         {/* Title */}
-        <h1 className="text-2xl font-bold text-center text-[#1A3C8F] mb-1">
+        <h1 className="text-2xl font-bold text-center text-[#0F172A] mb-1">
           Bienvenue sur EduNova
         </h1>
         <p className="text-center text-gray-400 text-sm mb-6">
@@ -84,8 +84,8 @@ export default function Login() {
                   onClick={() => setRole(r)}
                   className={`py-2 px-3 rounded-lg text-sm font-medium border transition-all ${
                     role === r
-                      ? 'bg-[#1A3C8F] text-white border-[#1A3C8F]'
-                      : 'bg-white text-gray-600 border-gray-200 hover:border-[#1A3C8F]'
+                      ? 'bg-[#0F172A] text-white border-[#0F172A]'
+                      : 'bg-white text-gray-600 border-gray-200 hover:border-[#0F172A]'
                   }`}
                 >
                   {r === 'etudiant' ? 'Étudiant' : r === 'professeur' ? 'Professeur' : 'Admin'}
@@ -105,7 +105,7 @@ export default function Login() {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="exemple@edunova.ci"
               required
-              className="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#1A3C8F] transition"
+              className="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#0F172A] transition"
             />
           </div>
 
@@ -120,13 +120,13 @@ export default function Login() {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
               required
-              className="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#1A3C8F] transition"
+              className="w-full border border-gray-200 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#0F172A] transition"
             />
           </div>
 
           {/* Forgot password */}
           <div className="text-right">
-            <a href="#" className="text-sm text-[#1A3C8F] hover:underline">
+            <a href="#" className="text-sm text-[#0F172A] hover:underline">
               Mot de passe oublié ?
             </a>
           </div>
@@ -135,7 +135,7 @@ export default function Login() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-[#1A3C8F] hover:bg-[#0f2460] text-white font-semibold py-3 rounded-lg transition-all shadow-md disabled:opacity-50"
+            className="w-full bg-[#0F172A] hover:bg-[#1e293b] text-white font-semibold py-3 rounded-lg transition-all shadow-md disabled:opacity-50"
           >
             {loading ? 'Connexion en cours...' : 'Se connecter'}
           </button>
@@ -144,7 +144,7 @@ export default function Login() {
         {/* Register link */}
         <p className="text-center text-sm text-gray-400 mt-6">
           Pas encore de compte ?{' '}
-          <a href="#" className="text-[#1A3C8F] font-medium hover:underline">
+          <a href="#" className="text-[#0F172A] font-medium hover:underline">
             Contactez votre administration
           </a>
         </p>
